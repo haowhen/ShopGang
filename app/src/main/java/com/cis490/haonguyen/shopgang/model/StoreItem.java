@@ -5,40 +5,49 @@ package com.cis490.haonguyen.shopgang.model;
  */
 public class StoreItem {
 
-	private String itemName;
-	private double itemPrice;
-	private int itemQuantity;
-	private String itemDescription;
+	private String _itemName;
+	private double _itemPrice;
+	private int _itemQuantity;
+	private String _itemDescription;
+	private Store _store;
 
 	public String ItemName() {
-		return itemName;
+		return _itemName;
 	}
 
 	public void ItemName(String itemName) {
-		this.itemName = itemName;
+		this._itemName = itemName;
 	}
 
 	public double ItemPrice() {
-		return itemPrice;
+		return _itemPrice;
 	}
 
 	public void ItemPrice(double itemPrice) {
-		this.itemPrice = itemPrice;
+		this._itemPrice = itemPrice;
 	}
 
 	public int ItemQuantity() {
-		return itemQuantity;
+		return _itemQuantity;
 	}
 
 	public void ItemQuantity(int itemQuantity) {
-		this.itemQuantity = itemQuantity;
+		this._itemQuantity = itemQuantity;
 	}
 
 	public String ItemDescription() {
-		return itemDescription;
+		return _itemDescription;
 	}
 
 	public void ItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
+		this._itemDescription = itemDescription;
+	}
+
+	public Store Store() {
+		return _store;
+	}
+
+	public void Store(Store _store) {
+		this._store = _store;
 	}
 }
