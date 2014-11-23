@@ -10,18 +10,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.NavDrawerListAdapter;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.fragment.SelectionFragment;
 import com.cis490.slidingmenu.models.NavDrawerItem.NavDrawerItem;
 import com.facebook.AppEventsLogger;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.UserSettingsFragment;
 
 import java.util.ArrayList;
 
@@ -86,6 +90,17 @@ public class MainActivity extends FragmentActivity {
                 invalidateOptionsMenu();
             }
         };
+
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+		if (savedInstanceState == null) {
+
+			// on first time display view for first nav item
+
+			displayView(0);
+
+		}
+		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		uiHelper = new UiLifecycleHelper(this, callback);
 		uiHelper.onCreate(savedInstanceState);
@@ -235,20 +250,13 @@ public class MainActivity extends FragmentActivity {
 
     @Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// only add the menu when the selection fragment is showing
-		if (fragments[SELECTION].isVisible()) {
-			if (menu.size() == 0) {
-				settings = menu.add(R.string.settings);
-                boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-                menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-                return super.onPrepareOptionsMenu(menu);
-			}
-			return true;
-		} else {
-			menu.clear();
-			settings = null;
-		}
-		return false;
+
+		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+
+		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+
+		return super.onPrepareOptionsMenu(menu);
+
 	}
 
     @Override
@@ -268,4 +276,94 @@ public class MainActivity extends FragmentActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+
+	/**
+
+	 * Slide menu item click listener
+
+	 * */
+
+	private class SlideMenuClickListener implements ListView.OnItemClickListener{
+
+		@Override
+
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+
+								long id) {
+
+			// display view for selected nav drawer item
+
+			displayView(position);
+
+		}
+
+	}
+
+	private void displayView(int position) {
+
+		// update the main content by replacing fragments
+
+		Fragment fragment = null;
+
+		switch (position) {
+
+			case 0:
+
+				fragment = new SelectionFragment();
+
+				break;
+
+			case 1:
+				break;
+
+			case 2:
+				break;
+
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+
+				fragment = new UserSettingsFragment();
+
+				break;
+			default:
+
+				break;
+
+		}
+
+
+
+		if (fragment != null) {
+
+			FragmentManager fragmentManager = getSupportFragmentManager();
+
+			fragmentManager.beginTransaction()
+
+					.replace(R.id.selectionFragment, fragment).commit();
+
+
+
+			// update selected item and title, then close the drawer
+
+			mDrawerList.setItemChecked(position, true);
+
+			mDrawerList.setSelection(position);
+
+			setTitle(navMenuTitles[position]);
+
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+		} else {
+
+			// error in creating fragment
+
+			Log.e("MainActivity", "Error in creating fragment");
+
+		}
+
+	}
 }
