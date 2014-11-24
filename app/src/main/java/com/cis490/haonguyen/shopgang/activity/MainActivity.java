@@ -15,16 +15,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.NavDrawerListAdapter;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.fragment.SelectionFragment;
 import com.cis490.slidingmenu.models.NavDrawerItem.NavDrawerItem;
 import com.facebook.AppEventsLogger;
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.ProfilePictureView;
 import com.facebook.widget.UserSettingsFragment;
 
 import java.util.ArrayList;
@@ -48,9 +54,13 @@ public class MainActivity extends FragmentActivity {
 
 	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
 
-	private MenuItem settings;
-
 	private boolean isResumed = false;
+
+	LinearLayout drawerll;
+
+	private static final int REAUTH_ACTIVITY_CODE = 100;
+	private ProfilePictureView mUserImage;
+	private TextView mUserName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +72,14 @@ public class MainActivity extends FragmentActivity {
         navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+		drawerll = (LinearLayout) findViewById(R.id.drawerll);
         navDrawerItems = new ArrayList<NavDrawerItem>();
+
+		mUserImage = (ProfilePictureView) findViewById(R.id.profile_pic);
+		mUserImage.setCropped(true);
+		mUserName = (TextView) findViewById(R.id.user_name);
+		Session session = Session.getActiveSession();
+		makeMeRequest(session);
 
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
@@ -136,7 +153,13 @@ public class MainActivity extends FragmentActivity {
 
 	//  private method that will be called due to session state changes.
 	// The method shows the relevant fragment based on the person's authenticated state.
-	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+	private void onSessionStateChange(final Session session, SessionState state, Exception exception) {
+
+		if(session != null && session.isOpened()){
+			//get user's data
+			makeMeRequest(session);
+		}
+
 		// Only make changes if the activity is visible
 		if (isResumed) {
 			FragmentManager manager = getSupportFragmentManager();
@@ -179,8 +202,8 @@ public class MainActivity extends FragmentActivity {
 	private Session.StatusCallback callback =
 			new Session.StatusCallback() {
 				@Override
-				public void call(Session session,
-								 SessionState state, Exception exception) {
+				public void call(final Session session,
+								 final SessionState state, final Exception exception) {
 					onSessionStateChange(session, state, exception);
 				}
 			};
@@ -251,7 +274,7 @@ public class MainActivity extends FragmentActivity {
     @Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		boolean drawerOpen = mDrawerLayout.isDrawerOpen(drawerll);
 
 		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
 
@@ -325,15 +348,14 @@ public class MainActivity extends FragmentActivity {
 			case 4:
 				break;
 			case 5:
-
 				fragment = new UserSettingsFragment();
-
 				break;
 			default:
 
 				break;
 
 		}
+
 
 
 
@@ -355,7 +377,7 @@ public class MainActivity extends FragmentActivity {
 
 			setTitle(navMenuTitles[position]);
 
-			mDrawerLayout.closeDrawer(mDrawerList);
+			mDrawerLayout.closeDrawer(drawerll);
 
 		} else {
 
@@ -366,4 +388,28 @@ public class MainActivity extends FragmentActivity {
 		}
 
 	}
+
+	private void makeMeRequest(final Session session) {
+		// Make an API call to get user data and define a
+		// new callback to handle the response.
+		Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
+			@Override
+			public void onCompleted(GraphUser user, Response response) {
+				// If the response is successful
+				if (session == Session.getActiveSession()) {
+					if (user != null) {
+						// Set the id for the ProfilePictureView
+						// view that in turn displays the profile picture.
+						mUserImage.setProfileId(user.getId());
+						mUserName.setText(user.getName());
+					}
+				}
+				if (response.getError() != null) {
+					// Handle errors, will do so later.
+				}
+			}
+		});
+		request.executeAsync();
+	}
+
 }
