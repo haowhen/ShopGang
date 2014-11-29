@@ -2,11 +2,13 @@
 <resources>
     <color name="list_divider">#0000FF</color>
     <color name="list_background">#FFFFFF</color>
-    <color name="list_background_pressed">#B2CCE6</color>
+    <color name="list_background_pressed">#0072C6</color>
     <color name="counter_text_bg">#B50D0D</color>
     <color name="list_item_title">#000000</color>
-    <color name="counter_text_color">#1E77BC</color>
+    <color name="counter_text_color">#0072C6</color>
     <color name="login_background">#ffffff</color>
     <color name="account_background">#2B2B2B</color>
     <color name="account_textColor">#ffffff</color>
+    <color name="homescreen_addbutton_background">#2B2B2B</color>
+    <color name="homescreen_addbutton_fontcolor">#ffffff</color>
 </resources>
