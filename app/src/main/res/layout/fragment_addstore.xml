@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/AddStore"
+        android:textSize="30sp"
+        android:id="@+id/btnAddStoreInit"
+        android:layout_alignParentBottom="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextStoreTitle"
+        android:text="Store Title"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="65dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload or Capture Image"
+        android:id="@+id/btnAddImage"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="selectImage"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Add or capture an image"
+        android:id="@+id/textViewImage"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="90dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Add the Store's Title"
+        android:id="@+id/textViewtitlestore"
+        android:layout_alignTop="@id/editTextStoreTitle"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="30dp"
+        />
+</RelativeLayout>

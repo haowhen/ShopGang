@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewMain"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/btnAddStore">
@@ -21,7 +21,8 @@
         android:text="@string/AddStore"
         android:width="180dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:onClick="AddStoreStart"/>
     <Button
         android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
