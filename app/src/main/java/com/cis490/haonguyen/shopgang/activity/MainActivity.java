@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +22,10 @@ import android.widget.TextView;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.NavDrawerListAdapter;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.fragment.AddStoreFragment;
 import com.cis490.haonguyen.shopgang.fragment.SelectionFragment;
+import com.cis490.haonguyen.shopgang.fragment.SplashFragment;
+import com.cis490.haonguyen.shopgang.model.Store;
 import com.cis490.slidingmenu.models.NavDrawerItem.NavDrawerItem;
 import com.facebook.AppEventsLogger;
 import com.facebook.Request;
@@ -32,13 +36,10 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 import com.facebook.widget.UserSettingsFragment;
-
 import java.util.ArrayList;
 
 
 public class MainActivity extends FragmentActivity {
-	private static final int SPLASH = 0;
-	private static final int SELECTION = 1;
 	private static final int SETTINGS = 2;
 	private static final int FRAGMENT_COUNT = SETTINGS +1;
 
@@ -51,6 +52,8 @@ public class MainActivity extends FragmentActivity {
     private TypedArray navMenuIcons;
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+    //private Store store;
+
 
 	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
 
@@ -64,9 +67,10 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+        //store = new Store();
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
+
         mTitle = mDrawerTitle = getTitle();
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
@@ -121,35 +125,7 @@ public class MainActivity extends FragmentActivity {
 
 		uiHelper = new UiLifecycleHelper(this, callback);
 		uiHelper.onCreate(savedInstanceState);
-
-		FragmentManager fm = getSupportFragmentManager();
-		fragments[SPLASH] = fm.findFragmentById(R.id.splashFragment);
-		fragments[SELECTION] = fm.findFragmentById(R.id.selectionFragment);
-		fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
-
-		FragmentTransaction transaction = fm.beginTransaction();
-		for(int i = 0; i < fragments.length; i++) {
-			transaction.hide(fragments[i]);
 		}
-		transaction.commit();
-		}
-
-	//method responsible for showing a given fragment and hiding all other fragments:
-	private void showFragment(int fragmentIndex, boolean addToBackStack) {
-		FragmentManager fm = getSupportFragmentManager();
-		FragmentTransaction transaction = fm.beginTransaction();
-		for (int i = 0; i < fragments.length; i++) {
-			if (i == fragmentIndex) {
-				transaction.show(fragments[i]);
-			} else {
-				transaction.hide(fragments[i]);
-			}
-		}
-		if (addToBackStack) {
-			transaction.addToBackStack(null);
-		}
-		transaction.commit();
-	}
 
 	//  private method that will be called due to session state changes.
 	// The method shows the relevant fragment based on the person's authenticated state.
@@ -172,11 +148,19 @@ public class MainActivity extends FragmentActivity {
 			if (state.isOpened()) {
 				// If the session state is open:
 				// Show the authenticated fragment
-				showFragment(SELECTION, false);
+                SelectionFragment selFrag = new SelectionFragment();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.mainLayout, selFrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
 			} else if (state.isClosed()) {
 				// If the session state is closed:
 				// Show the login fragment
-				showFragment(SPLASH, false);
+                SplashFragment splashFrag = new SplashFragment();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.mainLayout, splashFrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
 			}
 		}
 	}
@@ -186,15 +170,23 @@ public class MainActivity extends FragmentActivity {
 	protected void onResumeFragments() {
 		super.onResumeFragments();
 		Session session = Session.getActiveSession();
-
+        FragmentManager manager = getSupportFragmentManager();
 		if (session != null && session.isOpened()) {
 			// if the session is already open,
 			// try to show the selection fragment
-			showFragment(SELECTION, false);
+            SelectionFragment selFrag = new SelectionFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainLayout, selFrag);
+            transaction.addToBackStack(null);
+            transaction.commit();
 		} else {
 			// otherwise present the splash screen
 			// and ask the person to login.
-			showFragment(SPLASH, false);
+            SplashFragment splashFrag = new SplashFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainLayout, splashFrag);
+            transaction.addToBackStack(null);
+            transaction.commit();
 		}
 	}
 
@@ -338,6 +330,8 @@ public class MainActivity extends FragmentActivity {
 				break;
 
 			case 1:
+                fragment = new SelectionFragment();
+
 				break;
 
 			case 2:
@@ -361,11 +355,12 @@ public class MainActivity extends FragmentActivity {
 
 		if (fragment != null) {
 
-			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentManager manager = getSupportFragmentManager();
 
-			fragmentManager.beginTransaction()
-
-					.replace(R.id.selectionFragment, fragment).commit();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainLayout, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
 
 
@@ -389,6 +384,17 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
+    public void AddStoreStart(View view)
+    {
+        AddStoreFragment fragment = new AddStoreFragment();
+        FragmentManager manager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainLayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 	private void makeMeRequest(final Session session) {
 		// Make an API call to get user data and define a
 		// new callback to handle the response.
@@ -411,5 +417,7 @@ public class MainActivity extends FragmentActivity {
 		});
 		request.executeAsync();
 	}
-
+    //public Store getCurrentAddStore() {
+    //    return store;
+    //}
 }

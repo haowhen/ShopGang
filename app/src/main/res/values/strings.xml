@@ -8,6 +8,9 @@
     <string name="facebook_app_id">1490087411280440</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
+    <string name="AddStore">Add Store</string>
+    <string name="AddItem">Add Item</string>
+
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
