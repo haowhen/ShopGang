@@ -18,11 +18,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.cis490.haonguyen.shopgang.R;
-import com.cis490.haonguyen.shopgang.activity.AddStoreActivity;
-import com.cis490.haonguyen.shopgang.activity.MainActivity;
-import com.cis490.haonguyen.shopgang.model.Store;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;

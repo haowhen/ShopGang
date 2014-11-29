@@ -25,7 +25,6 @@ public class MainListAdapter extends ParseQueryAdapter<ParseObject> {
 		});
 	}
 
-	// Customize the layout by overriding getItemView
 	@Override
 	public View getItemView(ParseObject object, View v, ViewGroup parent) {
 		if (v == null) {
