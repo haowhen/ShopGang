@@ -30,18 +30,14 @@ public class AddStoreActivity extends FragmentActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 
-		// Begin with main data entry view,
-		// NewMealFragment
         AddStoreFragment fragment = new AddStoreFragment();
 
-		if (fragment == null) {
             FragmentManager manager = getSupportFragmentManager();
 
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.mainLayout, fragment);
             transaction.addToBackStack(null);
             transaction.commit();
-		}
 	}
 
 	public Store getAddStore() {
