@@ -1,37 +1,34 @@
 package com.cis490.haonguyen.shopgang.model;
 
+import com.parse.ParseClassName;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+
 import java.util.List;
 
 /**
  * Created by Hao on 11/17/2014.
  */
-public class Store {
+@ParseClassName("Store")
+public class Store extends ParseObject{
 
-	private String _storeName;
-	private int _itemCount;
-	private List<StoreItem> _storeItems;
+    public Store() {
 
-	public String StoreName() {
-		return _storeName;
+    }
+
+	public String getStoreName() {
+        return getString("storeName");
 	}
 
-	public void StoreName(String _storeName) {
-		this._storeName = _storeName;
+	public void setStoreName(String storeName) {
+        put("storeName", storeName);
 	}
 
-	public List<StoreItem> StoreItems() {
-		return _storeItems;
-	}
+    public ParseFile getPhotoFile() {
+        return getParseFile("imgStore");
+    }
 
-	public void StoreItems(List<StoreItem> storeItems) {
-		this._storeItems = storeItems;
-	}
-
-	public int ItemCount() {
-		return _itemCount;
-	}
-
-	public void ItemCount(int _itemCount) {
-		this._itemCount = _storeItems.size();
-	}
+    public void setPhotoFile(ParseFile file) {
+        put("imgStore", file);
+    }
 }

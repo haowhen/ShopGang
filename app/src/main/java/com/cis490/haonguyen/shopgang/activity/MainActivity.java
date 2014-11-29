@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +25,7 @@ import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.fragment.AddStoreFragment;
 import com.cis490.haonguyen.shopgang.fragment.SelectionFragment;
 import com.cis490.haonguyen.shopgang.fragment.SplashFragment;
+import com.cis490.haonguyen.shopgang.model.Store;
 import com.cis490.slidingmenu.models.NavDrawerItem.NavDrawerItem;
 import com.facebook.AppEventsLogger;
 import com.facebook.Request;
@@ -50,6 +52,8 @@ public class MainActivity extends FragmentActivity {
     private TypedArray navMenuIcons;
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+    //private Store store;
+
 
 	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
 
@@ -63,8 +67,10 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+        //store = new Store();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
         mTitle = mDrawerTitle = getTitle();
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
@@ -411,5 +417,7 @@ public class MainActivity extends FragmentActivity {
 		});
 		request.executeAsync();
 	}
-
+    //public Store getCurrentAddStore() {
+    //    return store;
+    //}
 }
