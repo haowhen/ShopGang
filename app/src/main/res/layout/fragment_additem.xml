@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/AddItem"
+        android:textSize="30sp"
+        android:id="@+id/btnAddItemInit"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Item Name:"
+        android:id="@+id/textViewItemName"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="10dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextItemName"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="10dp"
+        android:hint="Required"
+        android:inputType="text"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Quantity Selected:"
+        android:id="@+id/textViewQuantity"
+        android:layout_marginTop="80dp"
+        android:paddingLeft="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextQuantity"
+        android:inputType="number"
+        android:layout_marginTop="80dp"
+        android:paddingLeft="10dp"
+        android:hint="Required"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Price:"
+        android:id="@+id/textViewPrice"
+        android:layout_marginTop="130dp"
+        android:paddingLeft="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPrice"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="130dp"
+        android:paddingLeft="10dp"
+        android:hint="Optional"
+        android:layout_alignParentRight="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Item Description:"
+        android:id="@+id/textViewDescription"
+        android:layout_marginTop="180dp"
+        android:paddingLeft="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDescription"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="180dp"
+        android:hint="Optional"
+        android:layout_toRightOf="@+id/textViewDescription"
+        />
+</RelativeLayout>

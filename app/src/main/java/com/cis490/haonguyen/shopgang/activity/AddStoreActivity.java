@@ -25,19 +25,18 @@ public class AddStoreActivity extends FragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		store = new Store();
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_addstore);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        store = new Store();
 
         AddStoreFragment fragment = new AddStoreFragment();
+        FragmentManager manager = getSupportFragmentManager();
 
-            FragmentManager manager = getSupportFragmentManager();
-
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.mainLayout, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.AddStoreContainer, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 	}
 
 	public Store getAddStore() {

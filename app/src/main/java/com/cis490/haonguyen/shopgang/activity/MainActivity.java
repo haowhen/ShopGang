@@ -384,17 +384,6 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
-    public void AddStoreStart(View view)
-    {
-        AddStoreFragment fragment = new AddStoreFragment();
-        FragmentManager manager = getSupportFragmentManager();
-
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainLayout, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
 	private void makeMeRequest(final Session session) {
 		// Make an API call to get user data and define a
 		// new callback to handle the response.

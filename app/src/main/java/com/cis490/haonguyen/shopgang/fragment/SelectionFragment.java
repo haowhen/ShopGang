@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.MainListAdapter;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.activity.AddStoreActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
 import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseObject;
@@ -34,32 +35,47 @@ public class SelectionFragment extends Fragment {
     private ViewGroup parent;
     private boolean refresh = false;
     private Button btnRefresh;
+    private Button btnAddStore;
 
     @Override
     public void onStart(){
         super.onStart();
-        refreshButtonActivate();
+        RefreshButtonListener();
+
         if(stores == null) {
-            fillList();
+            CreateViewListObj();
+            parseFillList();
         }
         else
         {
-            fillListStored();
+            CreateViewListObj();
+            fillListMem();
         }
     }
 
-    private void refreshButtonActivate() {
+    private void RefreshButtonListener()
+    {
         btnRefresh = (Button)getView().findViewById(R.id.btnRefresh);
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fillList();
+                CreateViewListObj();
+                parseFillList();
             }
         });
     }
 
-    private void fillList()
+    private void CreateViewListObj()
     {
+        btnAddStore = (Button)getView().findViewById(R.id.btnAddStore);
+        btnAddStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddStoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
         refresh = false;
         listView = (ListView) getView().findViewById(R.id.listViewMain);
         adapter = new MainListAdapter(getActivity());
@@ -77,26 +93,18 @@ public class SelectionFragment extends Fragment {
         for (int i = 0; i < adapter.getCount(); i++) {
             stores.add(adapter.getItem(i));
         }
+    }
+
+    private void parseFillList()
+    {
         adapter.loadObjects();
     }
 
-    private void fillListStored()
+    private void fillListMem()
     {
-        listView = (ListView) getView().findViewById(R.id.listViewMain);
-        adapter = new MainListAdapter(getActivity());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Store selectedStore = (Store) listView.getItemAtPosition(position);
-                String selectedFromList = selectedStore.getStoreName();  // Or whatever method you need
-                Intent intent = new Intent(getActivity(), ItemListActivity.class);
-                intent.putExtra("selectedStore", selectedFromList);
-                startActivity(intent);
-            }
-        });
         //Prevent having to refresh the page each time.
         for (int i = 0; i < stores.size(); i++) {
-           adapter.getItemView(stores.get(i), v, parent);
+            adapter.getItemView(stores.get(i), v, parent);
         }
     }
 

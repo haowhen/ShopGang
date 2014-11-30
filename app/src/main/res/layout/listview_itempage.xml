@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="vertical"
+        android:background="@drawable/border_main">
+
+        <TextView
+            android:id="@+id/textViewItemName"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:layout_alignParentLeft="true"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="#D91313"
+            android:text="Reject"
+
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:id="@+id/btnReject"
+            android:layout_alignParentRight="true"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="#34D034"
+            android:layout_marginRight="15dp"
+            android:padding="10dp"
+            android:text="Purchase"
+            android:id="@+id/btnPurchase"
+            android:layout_toLeftOf="@id/btnReject"/>
+
+    </RelativeLayout>
+</LinearLayout>

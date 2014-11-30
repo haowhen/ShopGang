@@ -1,16 +1,18 @@
 package com.cis490.haonguyen.shopgang.fragment;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.StoreItemListAdapter;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.activity.AddItemActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
 
 /**
@@ -20,6 +22,7 @@ public class StoreItemListFragment extends Fragment {
 
     private ListView listView;
     private StoreItemListAdapter adapter;
+    private Button btnAddItem;
 
     @Override
     public void onStart(){
@@ -29,11 +32,21 @@ public class StoreItemListFragment extends Fragment {
 
     private void fillList()
     {
+        btnAddItem = (Button)getView().findViewById(R.id.btnAddItem);
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddItemActivity.class);
+                intent.putExtra("selectedStore", ((ItemListActivity) getActivity()).getStore());
+                startActivity(intent);
+            }
+        });
+
         listView = (ListView) getView().findViewById(R.id.listviewItemList);
-        adapter = new StoreItemListAdapter(getActivity(), ((ItemListActivity) getActivity()).getS());
+        adapter = new StoreItemListAdapter(getActivity(), ((ItemListActivity) getActivity()).getStore());
         listView.setAdapter(adapter);
         adapter.loadObjects();
-        Toast toast = Toast.makeText(getActivity(),"Now displaying "+ ((ItemListActivity) getActivity()).getS()+" items.", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getActivity(),"Now displaying "+ ((ItemListActivity) getActivity()).getStore()+" items.", Toast.LENGTH_LONG);
         toast.show();
     }
 

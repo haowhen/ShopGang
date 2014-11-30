@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
 import com.cis490.haonguyen.shopgang.fragment.StoreItemListFragment;
+import com.cis490.haonguyen.shopgang.model.Item;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -15,11 +16,11 @@ import com.parse.ParseQueryAdapter;
 /**
  * Created by Alex on 11/29/2014.
  */
-public class StoreItemListAdapter extends ParseQueryAdapter<ParseObject> {
+public class StoreItemListAdapter extends ParseQueryAdapter<Item> {
 
     public StoreItemListAdapter(final Context context, final String StoreName) {
         // Specification of which stores to display
-        super(context, new QueryFactory<ParseObject>() {
+        super(context, new QueryFactory<Item>() {
             public ParseQuery create() {
                 ParseQuery query = new ParseQuery("Item");
                 query.whereContains("storeName", StoreName);
@@ -29,17 +30,17 @@ public class StoreItemListAdapter extends ParseQueryAdapter<ParseObject> {
     }
 
     @Override
-    public View getItemView(ParseObject object, View v, ViewGroup parent) {
+    public View getItemView(Item object, View v, ViewGroup parent) {
         if (v == null)
         {
-            v = View.inflate(getContext(), R.layout.listview_mainpage, null);
+            v = View.inflate(getContext(), R.layout.listview_itempage, null);
         }
 
         super.getItemView(object, v, parent);
 
         // Add and download the image
-        TextView itemTextView = (TextView) v.findViewById(R.id.textViewStoreTitle);
-        itemTextView.setText(object.getString("itemName"));
+        TextView itemTextView = (TextView) v.findViewById(R.id.textViewItemName);
+        itemTextView.setText(object.getItemName());
 
         return v;
     }

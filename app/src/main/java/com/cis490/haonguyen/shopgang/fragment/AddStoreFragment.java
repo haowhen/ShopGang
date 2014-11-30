@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,13 +80,7 @@ public class AddStoreFragment extends Fragment {
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);
                     toast.show();
                     Delay();
-                    SelectionFragment fragment = new SelectionFragment();
-                    FragmentManager manager = getFragmentManager();
-
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.mainLayout, fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    NavUtils.navigateUpFromSameTask(getActivity());
                 }
                 else {
                     Toast toast = Toast.makeText(getActivity(), "ERROR: Title cannot be empty!", Toast.LENGTH_LONG);
