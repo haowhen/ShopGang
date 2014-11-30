@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
+import com.cis490.haonguyen.shopgang.fragment.StoreItemListFragment;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -15,13 +17,12 @@ import com.parse.ParseQueryAdapter;
  */
 public class StoreItemListAdapter extends ParseQueryAdapter<ParseObject> {
 
-    public StoreItemListAdapter(Context context) {
+    public StoreItemListAdapter(final Context context, final String StoreName) {
         // Specification of which stores to display
         super(context, new QueryFactory<ParseObject>() {
             public ParseQuery create() {
                 ParseQuery query = new ParseQuery("Item");
-                //String s = getIntent().getStringExtra("myString", "some default value");
-                query.whereContains("storeName", "Walmart");
+                query.whereContains("storeName", StoreName);
                 return query;
             }
         });
