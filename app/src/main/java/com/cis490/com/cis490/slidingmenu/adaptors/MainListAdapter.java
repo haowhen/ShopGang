@@ -6,18 +6,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cis490.haonguyen.shopgang.R;
-import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
-public class MainListAdapter extends ParseQueryAdapter<Store> {
+public class MainListAdapter extends ParseQueryAdapter<ParseObject> {
 
 	public MainListAdapter(Context context) {
 		// Specification of which stores to display
-		super(context, new QueryFactory<Store>() {
+		super(context, new QueryFactory<ParseObject>() {
 			public ParseQuery create() {
 				ParseQuery query = new ParseQuery("Store");
                 query.whereExists("storeName");
@@ -26,8 +25,8 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 		});
 	}
 
-    @Override
-	public View getItemView(Store object, View v, ViewGroup parent) {
+	@Override
+	public View getItemView(ParseObject object, View v, ViewGroup parent) {
 		if (v == null) {
 			v = View.inflate(getContext(), R.layout.listview_mainpage, null);
 		}
@@ -36,7 +35,7 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 
 		// Add and download the image
 		ParseImageView storeImage = (ParseImageView) v.findViewById(R.id.imgStore);
-		ParseFile imageFile = object.getPhotoFile();
+		ParseFile imageFile = object.getParseFile("imgStore");
 		if (imageFile != null) {
             storeImage.setParseFile(imageFile);
             storeImage.loadInBackground();
@@ -44,7 +43,7 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 
 		// Add the title view
 		TextView titleTextView = (TextView) v.findViewById(R.id.textViewStoreTitle);
-		titleTextView.setText(object.getStoreName());
+		titleTextView.setText(object.getString("storeName"));
 
 		return v;
 	}

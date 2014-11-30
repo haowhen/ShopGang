@@ -18,7 +18,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.cis490.haonguyen.shopgang.R;
-import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;
@@ -71,10 +70,10 @@ public class AddStoreFragment extends Fragment {
                     resized.compress(Bitmap.CompressFormat.PNG, 100, bos);
                     byte[] scaledData = bos.toByteArray();
                     ParseFile photoFile = new ParseFile("storeImage.png", scaledData);
-                    Store store = new Store();
+                    ParseObject store = new ParseObject("Store");
 
-                    store.setStoreName(pushText);
-                    store.setPhotoFile(photoFile);
+                    store.put("storeName", pushText);
+                    store.put("imgStore", photoFile);
                     store.saveInBackground();
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);
                     toast.show();

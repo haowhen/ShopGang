@@ -26,12 +26,12 @@
         android:layout_alignParentLeft="true"
         android:onClick="AddStoreStart"/>
     <Button
-        android:id="@+id/btnRefresh"
+        android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/Refresh"
+        android:text="@string/AddItem"
         android:width="150dp"
         android:layout_marginLeft="1dp"
         android:background="@color/homescreen_addbutton_background"

@@ -12,8 +12,6 @@ import com.cis490.haonguyen.shopgang.fragment.StoreItemListFragment;
 
 public class ItemListActivity extends FragmentActivity {
 
-    private String store;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +20,10 @@ public class ItemListActivity extends FragmentActivity {
         StoreItemListFragment fragment = new StoreItemListFragment();
 
         FragmentManager manager = getSupportFragmentManager();
-        store = getIntent().getStringExtra("selectedStore");
+
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.ItemListcontainer, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-    public String getS(){return store;}
 }
