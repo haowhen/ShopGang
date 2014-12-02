@@ -1,5 +1,6 @@
 package com.cis490.haonguyen.shopgang.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -21,19 +22,20 @@ public class AddItemActivity extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
         item = new Item();
         store = getIntent().getStringExtra("selectedStore");
 
         AddItemFragment fragment = new AddItemFragment();
-
         FragmentManager manager = getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.AddItemContainer, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

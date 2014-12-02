@@ -1,5 +1,7 @@
 package com.cis490.haonguyen.shopgang.fragment;
 
+import android.app.ActionBar;
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,11 +44,16 @@ public class StoreItemListFragment extends Fragment {
             }
         });
 
+		String storeTitle = ((ItemListActivity)getActivity()).getStore();
+
+		ActionBar actionBar = getActivity().getActionBar();
+		actionBar.setTitle(storeTitle);
+
         listView = (ListView) getView().findViewById(R.id.listviewItemList);
         adapter = new StoreItemListAdapter(getActivity(), ((ItemListActivity) getActivity()).getStore());
         listView.setAdapter(adapter);
         adapter.loadObjects();
-        Toast toast = Toast.makeText(getActivity(),"Now displaying "+ ((ItemListActivity) getActivity()).getStore()+" items.", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getActivity(),"Now displaying "+ storeTitle +" items.", Toast.LENGTH_LONG);
         toast.show();
     }
 

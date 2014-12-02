@@ -26,7 +26,6 @@ public class ItemListActivity extends FragmentActivity {
         store = getIntent().getStringExtra("selectedStore");
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.ItemListcontainer, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

@@ -145,7 +145,6 @@ public class MainActivity extends FragmentActivity {
                 SelectionFragment selFrag = new SelectionFragment();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.mainLayout, selFrag);
-                transaction.addToBackStack(null);
                 transaction.commit();
 			} else if (state.isClosed()) {
 				// If the session state is closed:
@@ -153,7 +152,6 @@ public class MainActivity extends FragmentActivity {
                 SplashFragment splashFrag = new SplashFragment();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.mainLayout, splashFrag);
-                transaction.addToBackStack(null);
                 transaction.commit();
 			}
 		}
@@ -171,7 +169,6 @@ public class MainActivity extends FragmentActivity {
             SelectionFragment selFrag = new SelectionFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.mainLayout, selFrag);
-            transaction.addToBackStack(null);
             transaction.commit();
 		} else {
 			// otherwise present the splash screen
@@ -179,7 +176,6 @@ public class MainActivity extends FragmentActivity {
             SplashFragment splashFrag = new SplashFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.mainLayout, splashFrag);
-            transaction.addToBackStack(null);
             transaction.commit();
 		}
 	}
@@ -353,7 +349,6 @@ public class MainActivity extends FragmentActivity {
 
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.mainLayout, fragment);
-            transaction.addToBackStack(null);
             transaction.commit();
 
 

@@ -10,6 +10,8 @@
         android:text="@string/AddItem"
         android:textSize="30sp"
         android:id="@+id/btnAddItemInit"
+        android:background="@color/addbutton_background"
+        android:textColor="@color/addbutton_fontcolor"
         android:layout_alignParentBottom="true"/>
 
     <TextView
@@ -30,6 +32,7 @@
         android:paddingLeft="10dp"
         android:hint="Required"
         android:inputType="text"
+        android:textAlignment="center"
         android:layout_alignParentRight="true"
         />
 
@@ -46,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextQuantity"
+        android:textAlignment="center"
         android:inputType="number"
         android:layout_marginTop="80dp"
         android:paddingLeft="10dp"
@@ -66,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextPrice"
+        android:textAlignment="center"
         android:inputType="numberDecimal"
         android:layout_marginTop="130dp"
         android:paddingLeft="10dp"
@@ -85,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextDescription"
+        android:textAlignment="center"
         android:inputType="textMultiLine"
         android:layout_marginTop="180dp"
         android:hint="Optional"

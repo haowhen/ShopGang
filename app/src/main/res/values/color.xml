@@ -9,6 +9,6 @@
     <color name="login_background">#ffffff</color>
     <color name="account_background">#2B2B2B</color>
     <color name="account_textColor">#ffffff</color>
-    <color name="homescreen_addbutton_background">#0072C6</color>
-    <color name="homescreen_addbutton_fontcolor">#ffffff</color>
+    <color name="addbutton_background">#2B2B2B</color>
+    <color name="addbutton_fontcolor">#ffffff</color>
 </resources>

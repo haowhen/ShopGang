@@ -10,6 +10,8 @@
         android:text="@string/AddStore"
         android:textSize="30sp"
         android:id="@+id/btnAddStoreInit"
+        android:background="@color/addbutton_background"
+        android:textColor="@color/addbutton_fontcolor"
         android:layout_alignParentBottom="true"/>
 
     <EditText
@@ -17,6 +19,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editTextStoreTitle"
         android:hint="Store Title"
+        android:textAlignment="center"
         android:layout_centerHorizontal="true"
         android:paddingTop="65dp"
         />

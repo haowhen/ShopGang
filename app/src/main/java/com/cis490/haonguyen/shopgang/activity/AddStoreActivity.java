@@ -35,7 +35,6 @@ public class AddStoreActivity extends FragmentActivity {
 
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.AddStoreContainer, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
 	}
 
