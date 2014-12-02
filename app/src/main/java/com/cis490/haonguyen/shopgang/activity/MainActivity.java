@@ -40,8 +40,6 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends FragmentActivity {
-	private static final int SETTINGS = 2;
-	private static final int FRAGMENT_COUNT = SETTINGS +1;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -54,14 +52,10 @@ public class MainActivity extends FragmentActivity {
     private NavDrawerListAdapter adapter;
     //private Store store;
 
-
-	private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
-
 	private boolean isResumed = false;
 
 	LinearLayout drawerll;
 
-	private static final int REAUTH_ACTIVITY_CODE = 100;
 	private ProfilePictureView mUserImage;
 	private TextView mUserName;
 

@@ -1,6 +1,5 @@
 package com.cis490.haonguyen.shopgang.fragment;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddItemActivity;
-import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
 import com.cis490.haonguyen.shopgang.model.Item;
 
 /**
@@ -68,7 +66,7 @@ public class AddItemFragment extends Fragment {
                         item.setItemDescription(description);
                     }
 
-                    item.saveInBackground();
+                    item.saveEventually();
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);
                     toast.show();
                     Delay();
