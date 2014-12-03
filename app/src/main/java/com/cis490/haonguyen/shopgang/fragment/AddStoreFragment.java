@@ -76,7 +76,7 @@ public class AddStoreFragment extends Fragment {
 
                     store.setStoreName(pushText);
                     store.setPhotoFile(photoFile);
-                    store.saveEventually();
+                    store.saveInBackground();
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);
                     toast.show();
                     Delay();
