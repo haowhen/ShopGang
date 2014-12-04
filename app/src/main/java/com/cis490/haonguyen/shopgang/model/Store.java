@@ -31,4 +31,5 @@ public class Store extends ParseObject{
     public void setPhotoFile(ParseFile file) {
         put("imgStore", file);
     }
+
 }
