@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
     private static final String SAVED_AUTH_CLIENT = "authorizationClient";
     private static final String EXTRA_REQUEST = "request";
 
-    private String callingPackage;
+	private String callingPackage;
     private AuthorizationClient authorizationClient;
     private AuthorizationClient.AuthorizationRequest request;
 

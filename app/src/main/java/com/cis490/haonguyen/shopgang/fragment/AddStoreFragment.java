@@ -101,12 +101,12 @@ public class AddStoreFragment extends Fragment {
             }
 
     public void startCamera() {
-        Fragment cameraFragment = new CameraFragment();
+        /*Fragment cameraFragment = new CameraFragment();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager()
                 .beginTransaction();
         transaction.replace(R.id.mainLayout, cameraFragment);
         transaction.addToBackStack("NewMealFragment");
-        transaction.commit();
+        transaction.commit();*/
     }
 
     @Override
