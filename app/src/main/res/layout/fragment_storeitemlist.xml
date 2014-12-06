@@ -13,13 +13,16 @@
         android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/AddItem"
         android:textSize="30sp"
         android:width="300dp"
         android:background="@color/addbutton_background"
         android:textColor="@color/addbutton_fontcolor"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

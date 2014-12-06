@@ -50,7 +50,7 @@ public class StoreItemListFragment extends Fragment {
 		actionBar.setTitle(storeTitle);
 
         listView = (ListView) getView().findViewById(R.id.listviewItemList);
-        adapter = new StoreItemListAdapter(getActivity(), ((ItemListActivity) getActivity()).getStore());
+        adapter = new StoreItemListAdapter(getActivity(), storeTitle);
         listView.setAdapter(adapter);
         adapter.loadObjects();
         Toast toast = Toast.makeText(getActivity(),"Now displaying "+ storeTitle +" items.", Toast.LENGTH_LONG);
