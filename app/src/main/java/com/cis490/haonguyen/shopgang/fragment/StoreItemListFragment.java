@@ -5,9 +5,12 @@ import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import com.cis490.com.cis490.slidingmenu.adaptors.StoreItemListAdapter;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddItemActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
+import com.cis490.haonguyen.shopgang.model.Item;
 
 /**
  * Created by Alex on 11/29/2014.
@@ -44,7 +48,7 @@ public class StoreItemListFragment extends Fragment {
             }
         });
 
-		String storeTitle = ((ItemListActivity)getActivity()).getStore();
+		final String storeTitle = ((ItemListActivity)getActivity()).getStore();
 
 		ActionBar actionBar = getActivity().getActionBar();
 		actionBar.setTitle(storeTitle);
@@ -53,8 +57,19 @@ public class StoreItemListFragment extends Fragment {
         adapter = new StoreItemListAdapter(getActivity(), storeTitle);
         listView.setAdapter(adapter);
         adapter.loadObjects();
-        Toast toast = Toast.makeText(getActivity(),"Now displaying "+ storeTitle +" items.", Toast.LENGTH_LONG);
-        toast.show();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Item selectedItem = ((ItemListActivity) getActivity()).getItem();
+                selectedItem = (Item) listView.getItemAtPosition(position);
+                ((ItemListActivity) getActivity()).setItem(selectedItem);
+
+                DetailsFragment fragment = new DetailsFragment();
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.ItemListcontainer, fragment);
+                transaction.commit();
+                }});
     }
 
     @Override

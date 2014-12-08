@@ -53,6 +53,7 @@ public class AddItemFragment extends Fragment {
 
                     item.setStoreName(((AddItemActivity) getActivity()).getStore());
                     item.setItemName(name);
+                    item.setPurchasedStatus(false);
                     item.setItemQuantity(Integer.parseInt(quantity));
                     if (price.isEmpty()) {
                         item.setItemPrice(0);

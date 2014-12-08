@@ -9,10 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.fragment.StoreItemListFragment;
+import com.cis490.haonguyen.shopgang.model.Item;
 
 public class ItemListActivity extends FragmentActivity {
 
     private String store;
+    private Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,4 +32,6 @@ public class ItemListActivity extends FragmentActivity {
     }
 
     public String getStore(){return store;}
+    public void setItem(Item value){item = value;}
+    public Item getItem(){return item;}
 }

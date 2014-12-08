@@ -45,11 +45,31 @@ public class Item extends ParseObject {
         put("itemDescription", itemDescription);
 	}
 
+    public String getItemParseID() {
+        return getObjectId();
+    }
+
     public String getStoreName() {
         return getString("storeName");
     }
 
     public void setStoreName(String storeName) {
         put("storeName", storeName);
+    }
+
+    public boolean getPurchasedStatus() {
+        return getBoolean("purchased");
+    }
+
+    public void setPurchasedStatus(boolean purchased) {
+        put("purchased", purchased);
+    }
+
+    public String getRejectReason() {
+        return getString("rejectReason");
+    }
+
+    public void setRejectReason(String reason) {
+        put("rejectReason", reason);
     }
 }
