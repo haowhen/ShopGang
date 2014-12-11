@@ -61,6 +61,12 @@
             android:parentActivityName="com.cis490.haonguyen.shopgang.activity.ItemListActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.StoreSelectionActivity"
+            android:label="Select or Create a Store"
+            android:parentActivityName="com.cis490.haonguyen.shopgang.activity.LoginActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

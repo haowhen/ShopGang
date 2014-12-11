@@ -13,11 +13,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.MainListAdapter;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddStoreActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
+import com.cis490.haonguyen.shopgang.activity.StoreSelectionActivity;
 import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseObject;
 
@@ -71,7 +73,7 @@ public class SelectionFragment extends Fragment {
         btnAddStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddStoreActivity.class);
+                Intent intent = new Intent(getActivity(), StoreSelectionActivity.class);
                 startActivity(intent);
             }
         });

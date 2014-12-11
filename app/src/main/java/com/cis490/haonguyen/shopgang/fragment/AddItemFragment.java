@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddItemActivity;
 import com.cis490.haonguyen.shopgang.model.Item;
+import com.parse.ParseObject;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 /**
  * Created by Alex on 11/30/2014.
@@ -45,7 +48,7 @@ public class AddItemFragment extends Fragment {
                 EditText itemPrice = (EditText) getView().findViewById(R.id.editTextPrice);
                 String price = itemPrice.getText().toString();
 
-                EditText itemDescription = (EditText) getView().findViewById(R.id.editTextPrice);
+                EditText itemDescription = (EditText) getView().findViewById(R.id.editTextDescription);
                 String description = itemDescription.getText().toString();
 
                 if (!name.isEmpty() && !quantity.isEmpty()) {
@@ -66,6 +69,8 @@ public class AddItemFragment extends Fragment {
                     } else {
                         item.setItemDescription(description);
                     }
+                    ParseRelation<ParseObject> relation = item.getRelation("users");
+                    relation.add(ParseUser.getCurrentUser());
 
                     item.saveEventually();
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);

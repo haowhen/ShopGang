@@ -16,15 +16,19 @@ import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 public class MainListAdapter extends ParseQueryAdapter<Store> {
 
+
 	public MainListAdapter(Context context) {
+
 		// Specification of which stores to display
 		super(context, new QueryFactory<Store>() {
-			public ParseQuery create() {
-				ParseQuery query = new ParseQuery("Store");
-				query.whereExists("storeName");
+			public ParseQuery<Store> create() {
+                ParseQuery<Store> query = ParseQuery.getQuery("Store");
+                query.whereEqualTo("users", ParseUser.getCurrentUser());
 				return query;
 			}
 		});
@@ -53,7 +57,8 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 		titleTextView.setText(object.getStoreName());
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Item");
-		query.whereEqualTo("storeName", object.getStoreName().toString());
+        query.whereEqualTo("users", ParseUser.getCurrentUser());
+		query.whereEqualTo("storeName", object.getStoreName());
 		query.countInBackground(new CountCallback() {
 			@Override
 			public void done(int count, ParseException e) {

@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.model.Item;
+import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 /**
  * Created by Alex on 11/29/2014.
@@ -21,8 +23,9 @@ public class StoreItemListAdapter extends ParseQueryAdapter<Item> {
         // Specification of which stores to display
         super(context, new QueryFactory<Item>() {
             public ParseQuery create() {
-                ParseQuery query = new ParseQuery("Item");
-                query.whereContains("storeName", StoreName);
+                ParseQuery<Store> query = ParseQuery.getQuery("Item");
+                query.whereEqualTo("users", ParseUser.getCurrentUser());
+                query.whereEqualTo("storeName", StoreName);
                 return query;
             }
         });
