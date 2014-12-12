@@ -12,6 +12,11 @@
     <string name="AddItem">Add Item</string>
     <string name="Refresh">Refresh</string>
 
+    //Strings for success state on getting friends information
+    <string name="error_dialog_title">Error</string>
+    <string name="error_dialog_button_text">OK</string>
+
+
 
     <string name="login_intro">Check out your Facebook profile by logging in with the button below!</string>
 <string name="gender">Gender</string>
