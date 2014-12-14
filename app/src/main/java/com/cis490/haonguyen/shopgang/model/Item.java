@@ -72,4 +72,12 @@ public class Item extends ParseObject {
     public void setRejectReason(String reason) {
         put("rejectReason", reason);
     }
+
+    public String getAddedBy() {
+        return getString("addedBy");
+    }
+
+    public void setAddedBy(String user) {
+        put("addedBy", user);
+    }
 }

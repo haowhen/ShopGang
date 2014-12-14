@@ -71,6 +71,7 @@ public class AddItemFragment extends Fragment {
                     }
                     ParseRelation<ParseObject> relation = item.getRelation("users");
                     relation.add(ParseUser.getCurrentUser());
+                    item.setAddedBy(ParseUser.getCurrentUser().getUsername());
 
                     item.saveEventually();
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);

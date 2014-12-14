@@ -11,4 +11,7 @@
     <color name="account_textColor">#ffffff</color>
     <color name="addbutton_background">#2B2B2B</color>
     <color name="addbutton_fontcolor">#ffffff</color>
+    <color name="purchaseBackground">#34D034</color>
+    <color name="rejectBackground">#D91313</color>
+    <color name="buttonTextColor">#ffffff</color>
 </resources>

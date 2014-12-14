@@ -50,6 +50,13 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".activity.DetailsActivity"
+            android:launchMode="singleTop"
+            android:label="Item Details"
+            android:parentActivityName="com.cis490.haonguyen.shopgang.activity.ItemListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".activity.ItemListActivity"
             android:launchMode="singleTop"
             android:parentActivityName="com.cis490.haonguyen.shopgang.activity.LoginActivity"

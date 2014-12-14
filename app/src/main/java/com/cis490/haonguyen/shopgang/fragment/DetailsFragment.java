@@ -13,9 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cis490.Parse.Application;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.activity.DetailsActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
 import com.cis490.haonguyen.shopgang.model.Item;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Alex on 12/7/2014.
@@ -39,8 +43,10 @@ public class DetailsFragment extends Fragment {
         TextView quantity = (TextView) getView().findViewById(R.id.textViewQuantity);
         TextView totalPrice = (TextView) getView().findViewById(R.id.textViewTotalPrice);
         TextView addedBy = (TextView) getView().findViewById(R.id.textViewAddedBy);
+        TextView description = (TextView) getView().findViewById(R.id.textTextDescriptionDetails);
 
-        item = ((ItemListActivity)getActivity()).getItem();
+        Application globalState = (Application) getActivity().getApplicationContext();
+        item = globalState.getDetailsItem();
 
         double totalPriceCalc = (item.getItemPrice() * item.getItemQuantity());
 
@@ -48,7 +54,9 @@ public class DetailsFragment extends Fragment {
         price.setText(Double.toString(item.getItemPrice()));
         quantity.setText(Integer.toString(item.getItemQuantity()));
         totalPrice.setText(Double.toString(totalPriceCalc));
-        addedBy.setText("NOT IMPLEMENTED");
+        addedBy.setText(item.getAddedBy());
+        description.setText(item.getItemDescription());
+
 
 
         btnPurchase = (Button)getView().findViewById(R.id.btnPurchase);
@@ -58,10 +66,7 @@ public class DetailsFragment extends Fragment {
             item.setPurchasedStatus(true);
                 item.saveEventually();
                 StoreItemListFragment fragment = new StoreItemListFragment();
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.ItemListcontainer, fragment);
-                transaction.commit();
+                NavUtils.navigateUpFromSameTask(getActivity());
                 Toast toast = Toast.makeText(getActivity(),"Item Purchased",Toast.LENGTH_LONG);
                 toast.show();
            }
@@ -70,11 +75,16 @@ public class DetailsFragment extends Fragment {
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 RejectFragment fragment = new RejectFragment();
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.ItemListcontainer, fragment);
-                transaction.commit();
+                transaction.replace(R.id.AddItemContainer, fragment);
+                transaction.commit();*/
+                Toast toast = Toast.makeText(getActivity(),item.getItemName()+" Deleted",Toast.LENGTH_LONG);
+                toast.show();
+                NavUtils.navigateUpFromSameTask(getActivity());
+                item.deleteEventually();
             }
         });
     }

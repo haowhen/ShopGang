@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.cis490.haonguyen.shopgang.R;
-import com.cis490.haonguyen.shopgang.fragment.StoreSelectionFragment;
+import com.cis490.haonguyen.shopgang.fragment.ExistingStoreFragment;
 
 /**
  * Created by Alex on 12/8/2014.
@@ -19,7 +19,7 @@ public class StoreSelectionActivity extends FragmentActivity {
         setContentView(R.layout.activity_store_selection);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        StoreSelectionFragment fragment = new StoreSelectionFragment();
+        ExistingStoreFragment fragment = new ExistingStoreFragment();
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
