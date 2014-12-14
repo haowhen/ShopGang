@@ -32,7 +32,7 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 			public ParseQuery<Store> create() {
                 ParseQuery<Store> query = ParseQuery.getQuery("Store");
                 query.whereEqualTo("users", ParseUser.getCurrentUser());
-                query.orderByAscending("storeName");
+                //query.orderByAscending("storeName");
 				return query;
 			}
 		});
