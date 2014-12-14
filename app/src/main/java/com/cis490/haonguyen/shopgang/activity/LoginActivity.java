@@ -1,11 +1,14 @@
 package com.cis490.haonguyen.shopgang.activity;
 
+<<<<<<< HEAD
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+=======
+>>>>>>> origin/master
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -34,6 +37,7 @@ import com.cis490.Parse.Application;
 import com.cis490.com.cis490.slidingmenu.adaptors.NavDrawerListAdapter;
 import com.cis490.haonguyen.shopgang.CustomDialogs.AddStore;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.fragment.FriendListFragment;
 import com.cis490.haonguyen.shopgang.fragment.LogOutFragment;
 import com.cis490.haonguyen.shopgang.fragment.SelectionFragment;
 import com.cis490.haonguyen.shopgang.model.Store;
@@ -44,9 +48,6 @@ import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
-import com.facebook.widget.UserSettingsFragment;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -56,7 +57,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -106,12 +106,12 @@ public class LoginActivity extends FragmentActivity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
 		navMenuIcons.recycle();
 
-		adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
+		adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer,R.string.app_name,R.string.app_name){
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
 				// calling onPrepareOptionsMenu() to show action bar icons
@@ -140,6 +140,8 @@ public class LoginActivity extends FragmentActivity {
 		Session session = ParseFacebookUtils.getSession();
 		if (session != null && session.isOpened()) {
 			makeMeRequest();
+
+			makeMeFriendRequest();
 		}
 	}
     @Override
@@ -210,6 +212,29 @@ public class LoginActivity extends FragmentActivity {
     }
 
 	@Override
+<<<<<<< HEAD
+=======
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
+	}
+
+	@Override
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+>>>>>>> origin/master
 	public boolean onPrepareOptionsMenu(Menu menu) {
 
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(drawerll);
@@ -241,9 +266,9 @@ public class LoginActivity extends FragmentActivity {
 
 	/**
 	 * Slide menu item click listener
-	 * */
+	 */
 
-	private class SlideMenuClickListener implements ListView.OnItemClickListener{
+	private class SlideMenuClickListener implements ListView.OnItemClickListener {
 
 		@Override
 
@@ -284,6 +309,7 @@ public class LoginActivity extends FragmentActivity {
 			case 3:
 				break;
 			case 4:
+				fragment = new FriendListFragment();
 				break;
 			case 5:
 				fragment = new LogOutFragment();
@@ -295,8 +321,6 @@ public class LoginActivity extends FragmentActivity {
 		}
 
 
-
-
 		if (fragment != null) {
 
 			FragmentManager manager = getSupportFragmentManager();
@@ -304,7 +328,6 @@ public class LoginActivity extends FragmentActivity {
 			FragmentTransaction transaction = manager.beginTransaction();
 			transaction.replace(R.id.mainLayout, fragment);
 			transaction.commit();
-
 
 
 			// update selected item and title, then close the drawer
@@ -389,6 +412,30 @@ public class LoginActivity extends FragmentActivity {
 		request.executeAsync();
 	}
 
+
+	private void makeMeFriendRequest() {
+		Request friendRequest = Request.newMyFriendsRequest(ParseFacebookUtils.getSession(),
+				new Request.GraphUserListCallback() {
+					@Override
+					public void onCompleted(List<GraphUser> users,
+											Response response) {
+						if (users != null) {
+							final List<String> friendsList = new ArrayList<String>();
+							for (final GraphUser user : users) {
+								friendsList.add(user.getId());
+							}
+
+							ParseUser currentUser = ParseUser.getCurrentUser();
+							currentUser.addAll("friendslist", friendsList);
+							currentUser.saveInBackground();
+
+						}
+					}
+				});
+		friendRequest.executeAsync();
+	}
+
+
 	private void updateViewsWithProfileInfo() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if (currentUser.has("profile")) {
@@ -414,7 +461,7 @@ public class LoginActivity extends FragmentActivity {
 		}
 	}
 
-	public void onLogoutClick(View v){
+	public void onLogoutClick(View v) {
 		logout();
 	}
 

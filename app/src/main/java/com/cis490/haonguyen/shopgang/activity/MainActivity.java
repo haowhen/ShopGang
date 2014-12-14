@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 		progressDialog = ProgressDialog.show(MainActivity.this, "", "Logging in...", true);
 
 		List<String> permissions = Arrays.asList("public_profile", "user_friends");
-		// NOTE: for extended permissions, like "user_about_me", your app must be reviewed by the Facebook team
+		// NOTE: for extended permissions, like "user_about_me", app must be reviewed by the Facebook team
 		// (https://developers.facebook.com/docs/facebook-login/permissions/)
 
 		ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
