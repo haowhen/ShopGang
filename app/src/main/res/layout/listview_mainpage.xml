@@ -12,11 +12,11 @@
         android:background="@drawable/border_main"
         >
 
-        <com.parse.ParseImageView
+        <ImageView
             android:id="@+id/imgStore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/shop_icon"/>
 
         <TextView
             android:id="@+id/textViewStoreTitle"

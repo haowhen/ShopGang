@@ -9,7 +9,7 @@
         android:layout_height="90dp"
         android:orientation="vertical"
         android:background="@drawable/border_main"
-        android:id="@+id/test">
+        android:id="@+id/itemEntity">
 
         <TextView
             android:id="@+id/textViewItemName"
@@ -19,6 +19,28 @@
             android:layout_height="wrap_content"
             android:text="Item Name"
             android:layout_alignParentLeft="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purchase"
+            android:id="@+id/btnPurchaseDetails"
+            android:background="@color/purchaseBackground"
+            android:textColor="@color/buttonTextColor"
+            android:padding="15dp"
+            android:focusable="false"
+            android:layout_marginRight="15dip"
+            android:layout_toLeftOf="@+id/btnRejectDetails"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Reject"
+            android:focusable="false"
+            android:id="@+id/btnRejectDetails"
+            android:background="@color/rejectBackground"
+            android:textColor="@color/buttonTextColor"
+            android:padding="15dp"/>
 
     </RelativeLayout>
 </LinearLayout>

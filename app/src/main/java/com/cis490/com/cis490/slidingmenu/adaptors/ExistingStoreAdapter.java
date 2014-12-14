@@ -1,8 +1,10 @@
 package com.cis490.com.cis490.slidingmenu.adaptors;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.parse.ParseUser;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExistingStoreAdapter extends ParseQueryAdapter<Store> {
@@ -30,9 +33,9 @@ public class ExistingStoreAdapter extends ParseQueryAdapter<Store> {
 		// Specification of which stores to display
 		super(context, new QueryFactory<Store>() {
 			public ParseQuery create() {
-				ParseQuery query = new ParseQuery("Store");
-				query.whereExists("storeName");
-				return query;
+                    ParseQuery query = new ParseQuery("Store");
+                    query.whereExists("storeName");
+                    return query;
 			}
 		});
 	}
@@ -42,7 +45,6 @@ public class ExistingStoreAdapter extends ParseQueryAdapter<Store> {
         TextView storeTextView;
         Button addButton;
         Button removeButton;
-        ParseImageView imageView;
     }
 
 	@Override
@@ -58,7 +60,6 @@ public class ExistingStoreAdapter extends ParseQueryAdapter<Store> {
             viewHolder.storeTextView = (TextView) v.findViewById(R.id.textViewStoreName);
             viewHolder.addButton = (Button) v.findViewById(R.id.btnAddStoreExist);
             viewHolder.removeButton = (Button) v.findViewById(R.id.btnRemoveStoreExist);
-            viewHolder.imageView = (ParseImageView) v.findViewById(R.id.imgStore);
 
             v.setTag(viewHolder);
 		}
@@ -67,10 +68,7 @@ public class ExistingStoreAdapter extends ParseQueryAdapter<Store> {
             viewHolder = (ViewHolderItem) v.getTag();
         }
 
-        viewHolder.addButton.setTag(object);
-        viewHolder.removeButton.setTag(object);
-
-int goneVisDeterm = 0;
+        int goneVisDeterm = 0;
 
         ParseQuery<Store> query = ParseQuery.getQuery("Store");
         query.whereEqualTo("users", ParseUser.getCurrentUser());

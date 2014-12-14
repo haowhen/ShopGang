@@ -1,5 +1,6 @@
 package com.cis490.haonguyen.shopgang.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.SyncStateContract;
@@ -15,7 +16,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cis490.Parse.Application;
 import com.cis490.com.cis490.slidingmenu.adaptors.MainListAdapter;
+import com.cis490.com.cis490.slidingmenu.adaptors.RefreshAdapters.StoredMainListAdapter;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddStoreActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
@@ -23,6 +26,7 @@ import com.cis490.haonguyen.shopgang.activity.StoreSelectionActivity;
 import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,56 +36,39 @@ public class SelectionFragment extends Fragment {
 
     private ListView listView;
     private MainListAdapter adapter;
-    private List<Store> stores;
+    private StoredMainListAdapter storedAdapter;
     private View v;
     private ViewGroup parent;
     private boolean refresh = false;
-    private Button btnRefresh;
-    private Button btnAddStore;
 
     @Override
     public void onStart(){
         super.onStart();
-        RefreshButtonListener();
-
-        if(stores == null) {
             CreateViewListObj();
-            parseFillList();
-        }
-        else
-        {
-            CreateViewListObj();
-            fillListMem();
-        }
-    }
-
-    private void RefreshButtonListener()
-    {
-        btnRefresh = (Button)getView().findViewById(R.id.btnRefresh);
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreateViewListObj();
-                parseFillList();
-            }
-        });
     }
 
     private void CreateViewListObj()
     {
-        btnAddStore = (Button)getView().findViewById(R.id.btnAddStore);
-        btnAddStore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StoreSelectionActivity.class);
-                startActivity(intent);
-            }
-        });
+        Application globalState = (Application)getActivity().getApplicationContext();
 
-        refresh = false;
         listView = (ListView) getView().findViewById(R.id.listViewMain);
-        adapter = new MainListAdapter(getActivity());
-        listView.setAdapter(adapter);
+
+        ArrayList<Store> tempStores = globalState.MainStoreRefresh();
+
+        if(globalState.MainStoreRefresh().size() == 0)
+        {
+            adapter = new MainListAdapter(getActivity());
+            listView.setAdapter(adapter);
+            adapter.loadObjects();
+        }
+
+        else
+        {
+            storedAdapter = new StoredMainListAdapter(getActivity(),R.layout.listview_mainpage, globalState.MainStoreRefresh());
+            listView.setAdapter(null);
+            listView.setAdapter(storedAdapter);
+        }
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Store selectedStore = (Store) listView.getItemAtPosition(position);
@@ -91,23 +78,7 @@ public class SelectionFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        //Prevent having to refresh the page each time.
-        for (int i = 0; i < adapter.getCount(); i++) {
-            stores.add(adapter.getItem(i));
-        }
-    }
 
-    private void parseFillList()
-    {
-        adapter.loadObjects();
-    }
-
-    private void fillListMem()
-    {
-        //Prevent having to refresh the page each time.
-        for (int i = 0; i < stores.size(); i++) {
-            adapter.getItemView(stores.get(i), v, parent);
-        }
     }
 
     @Override

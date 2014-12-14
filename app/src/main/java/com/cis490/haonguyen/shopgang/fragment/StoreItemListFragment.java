@@ -15,9 +15,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cis490.Parse.Application;
 import com.cis490.com.cis490.slidingmenu.adaptors.StoreItemListAdapter;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddItemActivity;
+import com.cis490.haonguyen.shopgang.activity.DetailsActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
 import com.cis490.haonguyen.shopgang.model.Item;
 
@@ -54,7 +56,8 @@ public class StoreItemListFragment extends Fragment {
 		actionBar.setTitle(storeTitle);
 
         listView = (ListView) getView().findViewById(R.id.listviewItemList);
-        adapter = new StoreItemListAdapter(getActivity(), storeTitle);
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        adapter = new StoreItemListAdapter(getActivity(), storeTitle, manager);
         listView.setAdapter(adapter);
         adapter.loadObjects();
 
@@ -64,11 +67,13 @@ public class StoreItemListFragment extends Fragment {
                 selectedItem = (Item) listView.getItemAtPosition(position);
                 ((ItemListActivity) getActivity()).setItem(selectedItem);
 
-                DetailsFragment fragment = new DetailsFragment();
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.ItemListcontainer, fragment);
-                transaction.commit();
+                Item item = ((ItemListActivity) getActivity()).getItem();
+                Application globalState = (Application) getActivity().getApplicationContext();
+
+                globalState.setDetailsItem(item);
+
+                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                startActivity(intent);
                 }});
     }
 

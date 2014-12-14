@@ -33,4 +33,12 @@ public class Store extends ParseObject{
         put("imgStore", file);
     }
 
+    public int getItemCount() {
+        return getInt("count");
+    }
+
+    public void setItemCount(int count) {
+        put("count", count);
+    }
+
 }
