@@ -1,23 +1,15 @@
 package com.cis490.haonguyen.shopgang.activity;
 
-<<<<<<< HEAD
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-=======
->>>>>>> origin/master
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -25,13 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cis490.Parse.Application;
 import com.cis490.com.cis490.slidingmenu.adaptors.NavDrawerListAdapter;
@@ -40,7 +29,6 @@ import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.fragment.FriendListFragment;
 import com.cis490.haonguyen.shopgang.fragment.LogOutFragment;
 import com.cis490.haonguyen.shopgang.fragment.SelectionFragment;
-import com.cis490.haonguyen.shopgang.model.Store;
 import com.cis490.slidingmenu.models.NavDrawerItem.NavDrawerItem;
 import com.facebook.FacebookRequestError;
 import com.facebook.Request;
@@ -49,13 +37,10 @@ import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,29 +196,6 @@ public class LoginActivity extends FragmentActivity {
     }
 
 	@Override
-<<<<<<< HEAD
-=======
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-		return true;
-	}
-
-	@Override
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		switch (item.getItemId()) {
-			case R.id.action_settings:
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
-
-	@Override
->>>>>>> origin/master
 	public boolean onPrepareOptionsMenu(Menu menu) {
 
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(drawerll);
