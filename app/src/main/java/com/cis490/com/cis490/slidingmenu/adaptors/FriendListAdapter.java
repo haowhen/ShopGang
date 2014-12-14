@@ -1,21 +1,14 @@
 package com.cis490.com.cis490.slidingmenu.adaptors;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cis490.Parse.Application;
 import com.cis490.haonguyen.shopgang.R;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
@@ -23,19 +16,19 @@ import com.parse.ParseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Hao on 12/9/2014.
  */
 public class FriendListAdapter extends ParseQueryAdapter<ParseUser> {
 
-
 	private ProfilePictureView mUserImage;
 	private TextView mUserName;
-	private TextView mUserBirthday;
+	private TextView mJoinDate;
 
 	public FriendListAdapter(Context context) {
 
@@ -47,8 +40,7 @@ public class FriendListAdapter extends ParseQueryAdapter<ParseUser> {
 				try {
 					String currentUserId = userProfile.getString("facebookId");
 					return query.whereEqualTo("friendslist", currentUserId);
-				}
-				catch (JSONException e){
+				} catch (JSONException e) {
 					Log.d(Application.TAG, "Error getting current user name");
 					return null;
 				}
@@ -57,37 +49,34 @@ public class FriendListAdapter extends ParseQueryAdapter<ParseUser> {
 	}
 
 	@Override
+	public long getItemId(int position) {
+		return super.getItemId(position);
+	}
+
+
+	@Override
 	public View getItemView(ParseUser object, View v, ViewGroup parent) {
 		if (v == null) {
 			v = View.inflate(getContext(), R.layout.listview_friendlist, null);
 		}
 		super.getItemView(object, v, parent);
 
-		final View finalV = v;
+		JSONObject userProfile = object.getJSONObject("profile");
 
+		try {
+			mUserImage = (ProfilePictureView) v.findViewById(R.id.imgUser);
+			mUserImage.setCropped(true);
+			mUserImage.setProfileId(userProfile.getString("facebookId"));
+			mUserName = (TextView) v.findViewById(R.id.textViewUserName);
+			mUserName.setText(userProfile.getString("name"));
+			mJoinDate = (TextView)v.findViewById(R.id.textViewJoinDate);
 
-		Request.newMyFriendsRequest(ParseFacebookUtils.getSession(), new Request.GraphUserListCallback(){
-			@Override
-			public void onCompleted(List<GraphUser> users, Response response){
-				if(users != null){
+			mJoinDate.setText("Join Date: " + android.text.format.DateFormat.format("MMM dd, yyyy", object.getCreatedAt()));
+		}
+		catch(JSONException e){
 
-					String[] names = new String[users.size()];
-					String[] ids = new String[users.size()];
-					for(int i = 0; i < users.size(); i++) {
-						names[i] = users.get(i).getName();
-						ids[i] = users.get(i).getId();
+		}
 
-
-					}
-					mUserImage = (ProfilePictureView)finalV.findViewById(R.id.imgUser);
-					mUserImage.setCropped(true);
-					mUserImage.setProfileId(ids[0]);
-					mUserName = (TextView)finalV.findViewById(R.id.textViewUserName);
-					mUserName.setText(names[0]);
-
-				}
-			}
-		}).executeAsync();
 
 		return v;
 	}

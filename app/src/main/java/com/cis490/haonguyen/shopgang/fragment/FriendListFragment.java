@@ -9,7 +9,9 @@ import android.widget.ListView;
 
 import com.cis490.com.cis490.slidingmenu.adaptors.FriendListAdapter;
 import com.cis490.haonguyen.shopgang.R;
+import com.cis490.haonguyen.shopgang.activity.LoginActivity;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class FriendListFragment extends Fragment {
 
 	private ListView listView;
 	private FriendListAdapter adapter;
+	ParseUser parseUser;
 
 	@Override
 	public void onStart(){
@@ -33,7 +36,6 @@ public class FriendListFragment extends Fragment {
 	private void CreateViewListObj(){
 		listView = (ListView)getView().findViewById(R.id.listViewFriendList);
 		adapter = new FriendListAdapter(getActivity());
-		int[] imgUsers = {R.id.imgUser};
 		listView.setAdapter(adapter);
 	}
 

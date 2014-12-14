@@ -45,7 +45,6 @@ import java.util.List;
  * Created by Hao on 12/6/2014.
  */
 public class LoginActivity extends FragmentActivity {
-
 	//Navmenu stuff
 	LinearLayout drawerll;
 	private DrawerLayout mDrawerLayout;
@@ -339,6 +338,10 @@ public class LoginActivity extends FragmentActivity {
 							}
 
 							ParseUser currentUser = ParseUser.getCurrentUser();
+							currentUser.removeAll("friendslist", friendsList);
+							currentUser.saveInBackground();
+
+
 							currentUser.addAll("friendslist", friendsList);
 							currentUser.saveInBackground();
 

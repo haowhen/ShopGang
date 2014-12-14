@@ -20,18 +20,20 @@
 
         <TextView
             android:id="@+id/textViewUserName"
+            android:text="User Name"
             android:textSize="20dp"
             android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"/>
+
         <TextView
-            android:id="@+id/textViewBirthday"
+            android:id="@+id/textViewJoinDate"
+            android:text="Join Date: "
             android:textSize="15dp"
             android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewUserName"/>
     </RelativeLayout>
 </LinearLayout>
