@@ -41,7 +41,7 @@ public class FriendListAdapter extends ParseQueryAdapter<ParseUser> {
 					String currentUserId = userProfile.getString("facebookId");
 					return query.whereEqualTo("friendslist", currentUserId);
 				} catch (JSONException e) {
-					Log.d(Application.TAG, "Error getting current user name");
+					Log.d(Application.TAG, "Error getting current user profile.");
 					return null;
 				}
 			}
