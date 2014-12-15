@@ -31,6 +31,13 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.ListsofItemsActivity"
+            android:launchMode="singleTop"
+            android:label="Lists of Items"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.cis490.haonguyen.shopgang.activity.LoginActivity"/>
+
         <activity android:name="com.facebook.LoginActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"/>
@@ -55,7 +62,7 @@
         <activity
             android:name=".activity.ItemListActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="com.cis490.haonguyen.shopgang.activity.LoginActivity"
+            android:parentActivityName="com.cis490.haonguyen.shopgang.activity.ListsofItemsActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

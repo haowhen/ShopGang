@@ -15,11 +15,13 @@ import android.view.WindowManager;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.fragment.AddItemFragment;
 import com.cis490.haonguyen.shopgang.model.Item;
+import com.cis490.haonguyen.shopgang.model.ItemList;
 
 public class AddItemActivity extends FragmentActivity {
 
     private Item item;
     private String store;
+    private ItemList list;
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -54,6 +56,7 @@ public class AddItemActivity extends FragmentActivity {
     public Item getAddItem() {
         return item;
     }
+    public ItemList getItemList() {return list;}
     public String getStore() {
         return store;
     }

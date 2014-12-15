@@ -12,12 +12,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cis490.Parse.Application;
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddItemActivity;
 import com.cis490.haonguyen.shopgang.model.Item;
+import com.cis490.haonguyen.shopgang.model.ItemList;
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Alex on 11/30/2014.
@@ -71,7 +77,24 @@ public class AddItemFragment extends Fragment {
                     }
                     ParseRelation<ParseObject> relation = item.getRelation("users");
                     relation.add(ParseUser.getCurrentUser());
-                    item.setAddedBy(ParseUser.getCurrentUser().getUsername());
+
+                    Application globalState = (Application) getActivity().getApplicationContext();
+
+                    ItemList list = globalState.getItemList();
+
+                    ParseRelation<ParseObject> relationItemList = item.getRelation("ItemList");
+                    relationItemList.add(list);
+
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+
+                    JSONObject userProfile = currentUser.getJSONObject("profile");
+                    try {
+                        item.setAddedBy(userProfile.getString("name"));
+                    }
+                    catch(JSONException e){
+                        Toast toast = Toast.makeText(getActivity(), "JSON request Failed!", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
 
                     item.saveEventually();
                     Toast toast = Toast.makeText(getActivity(), "Items pushed to Parse.com.", Toast.LENGTH_LONG);

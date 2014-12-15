@@ -20,22 +20,24 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainListAdapter extends ParseQueryAdapter<Store> {
 
 
 	public MainListAdapter(Context context) {
-
-
 
 		// Specification of which stores to display
 		super(context, new QueryFactory<Store>() {
 			public ParseQuery<Store> create() {
                 ParseQuery<Store> query = ParseQuery.getQuery("Store");
                 query.whereEqualTo("users", ParseUser.getCurrentUser());
-                //query.orderByAscending("storeName");
+                query.orderByAscending("storeName");
 				return query;
 			}
-		});
+        });
+
 	}
 
     //Improve Speed of adapter
@@ -70,7 +72,7 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 		TextView titleTextView = viewHolder.storeTextView;
 		titleTextView.setText(object.getStoreName());
 
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("Item");
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ItemList");
         query.whereEqualTo("users", ParseUser.getCurrentUser());
 		query.whereEqualTo("storeName", object.getStoreName());
 		query.countInBackground(new CountCallback() {
@@ -79,12 +81,14 @@ public class MainListAdapter extends ParseQueryAdapter<Store> {
 				if(e == null){
                     object.setItemCount(count);
 					TextView itemCountTextView = viewHolder.storeCount;
-					itemCountTextView.setText("Item count: " + count);
+					itemCountTextView.setText("List count: " + count);
 				}
 			}
 		});
-        Application globalState = (Application)getContext().getApplicationContext();
+
+        final Application globalState = (Application) getContext().getApplicationContext();
         globalState.setStoreList(object);
+
 		return v;
 	}
 

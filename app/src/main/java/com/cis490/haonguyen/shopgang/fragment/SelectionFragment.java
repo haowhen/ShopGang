@@ -22,6 +22,7 @@ import com.cis490.com.cis490.slidingmenu.adaptors.RefreshAdapters.StoredMainList
 import com.cis490.haonguyen.shopgang.R;
 import com.cis490.haonguyen.shopgang.activity.AddStoreActivity;
 import com.cis490.haonguyen.shopgang.activity.ItemListActivity;
+import com.cis490.haonguyen.shopgang.activity.ListsofItemsActivity;
 import com.cis490.haonguyen.shopgang.activity.StoreSelectionActivity;
 import com.cis490.haonguyen.shopgang.model.Store;
 import com.parse.ParseObject;
@@ -58,12 +59,17 @@ public class SelectionFragment extends Fragment {
         if(globalState.MainStoreRefresh().size() == 0)
         {
             adapter = new MainListAdapter(getActivity());
+            globalState.FORCEREFRESH();
             listView.setAdapter(adapter);
             adapter.loadObjects();
         }
 
         else
         {
+            if(!globalState.getStoreRefreshState())
+            {
+                globalState.PurgeExtras();
+            }
             storedAdapter = new StoredMainListAdapter(getActivity(),R.layout.listview_mainpage, globalState.MainStoreRefresh());
             listView.setAdapter(null);
             listView.setAdapter(storedAdapter);
@@ -73,7 +79,7 @@ public class SelectionFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Store selectedStore = (Store) listView.getItemAtPosition(position);
                 String selectedFromList = selectedStore.getStoreName();  // Or whatever method you need
-                Intent intent = new Intent(getActivity(), ItemListActivity.class);
+                Intent intent = new Intent(getActivity(), ListsofItemsActivity.class);
                 intent.putExtra("selectedStore", selectedFromList);
                 startActivity(intent);
             }

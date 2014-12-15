@@ -62,7 +62,7 @@ public class StoredMainListAdapter extends ArrayAdapter<Store> {
         titleTextView.setText(store.getStoreName());
 
         TextView itemCountTextView = viewHolder.storeCount;
-        itemCountTextView.setText("Item count: " + store.getItemCount());
+        itemCountTextView.setText("List count: " + store.getItemCount());
 
         return v;
 
