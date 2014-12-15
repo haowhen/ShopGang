@@ -132,30 +132,29 @@
         android:layout_marginTop="20dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:textColor="@color/buttonTextColor"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:background="@color/rejectBackground"
-        android:text="Reject"
-        android:padding="15dp"
+        android:text="Remove"
         android:id="@+id/btnReject"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_toRightOf="@+id/btnPurchase"
         android:layout_below="@id/textTextDescriptionDetails"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/buttonTextColor"
         android:layout_below="@+id/textTextDescriptionDetails"
         android:background="@color/purchaseBackground"
-        android:layout_marginRight="15dp"
         android:text="Purchase"
-        android:padding="15dp"
+        android:layout_marginBottom="15dp"
         android:id="@+id/btnPurchase"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"/>

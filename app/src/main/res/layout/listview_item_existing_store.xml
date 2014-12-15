@@ -6,7 +6,7 @@
     android:gravity="center_vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="130dp"
         android:orientation="vertical"
         android:background="@drawable/border_main"
         android:id="@+id/test">
@@ -18,20 +18,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Store Name"
-            android:layout_alignParentLeft="true"/>
+            android:singleLine="true"
+            android:layout_centerHorizontal="true"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_below="@id/textViewStoreName"
             android:padding="20dip"
             android:text="Add Store"
             android:id="@+id/btnAddStoreExist"
+            android:layout_centerHorizontal="true"
             android:textColor="@color/addbutton_fontcolor"
             android:background="@color/addbutton_background"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textViewStoreName"
+            android:layout_centerHorizontal="true"
             android:padding="20dip"
             android:text="Remove Store"
             android:id="@+id/btnRemoveStoreExist"
